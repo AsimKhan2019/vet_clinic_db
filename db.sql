@@ -10,7 +10,7 @@ CREATE DATABASE vet_clinic
     LC_CTYPE = 'English_United States.1252'
     TABLESPACE = pg_default
     CONNECTION LIMIT = -1
-    IS_TEMPLATE = True;
+    IS_TEMPLATE = False;
 
 COMMENT ON DATABASE vet_clinic
     IS 'Vet Clinic is a Microverse exercise to demonstrate that students can create database and their relvant tables';
