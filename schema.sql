@@ -9,7 +9,7 @@ CREATE TABLE IF NOT EXISTS animals
     date_of_birth date NOT NULL,
     escape_attempts integer NOT NULL,
     neutered boolean NOT NULL,
-    weigth double precision NOT NULL,
+    weight double precision NOT NULL,
     CONSTRAINT animals_pkey PRIMARY KEY (id)
 )
 
