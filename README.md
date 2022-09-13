@@ -2,7 +2,7 @@
 
 # Vet Clinic Database 
 
-> This is an exercise project to practice sql commands to run CRUD operations in the database 
+> This is an exercise project to practice sql commands to run CRUD operations in the database. The purpose is to understand the SQL commands and database backend. 
 
 
 ## Built With
@@ -23,7 +23,7 @@ Remove unneccessary files from the project
 Install PostgreSQL into your system. 
 Create sql files
 Add commands to the sql files 
-Run the commands. 
+Run the commands
 
 ## Authors
 
