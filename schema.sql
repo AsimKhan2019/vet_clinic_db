@@ -1,5 +1,4 @@
 -- Table: animals
-
 -- DROP TABLE IF EXISTS animals;
 
 CREATE TABLE IF NOT EXISTS animals
