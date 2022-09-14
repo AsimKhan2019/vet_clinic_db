@@ -21,3 +21,44 @@ INSERT INTO animals(name,date_of_birth,escape_attempts,neutered,weight) VALUES (
 INSERT INTO animals(name,date_of_birth,escape_attempts,neutered,weight) VALUES ('Blossom','1998-10-13',3,TRUE,17);
 
 INSERT INTO animals(name,date_of_birth,escape_attempts,neutered,weight) VALUES ('Ditto','2022-05-14',4,TRUE,22);
+
+
+--New data for Microverse Exercise 3
+
+INSERT INTO "Owners" (full_name,age) VALUES ('Sam Smith', 34);
+
+INSERT INTO "Owners" (full_name,age) VALUES ('Jennifer Orwell', 19);
+
+INSERT INTO "Owners" (full_name,age) VALUES ('Bob', 45);
+
+INSERT INTO "Owners" (full_name,age) VALUES ('Melody Pond', 77);
+
+INSERT INTO "Owners" (full_name,age) VALUES ('Dean Winchester', 14);
+
+INSERT INTO "Owners" (full_name,age) VALUES ('Jodie Whittaker', 38);
+
+INSERT INTO "Species" (name) VALUES ('Pokemon');
+
+INSERT INTO "Species" (name) VALUES ('Digimon');
+
+
+--Updating the species_id in the animals table
+
+UPDATE animals SET species_id = (SELECT id FROM "Species" WHERE name = 'Digimon') WHERE RIGHT(name,3) = 'mon';
+
+UPDATE animals SET species_id = (SELECT id FROM "Species" WHERE name = 'Pokemon') WHERE RIGHT(name,3) <> 'mon';
+
+
+--Updating the owner_id in the animals table
+
+UPDATE animals SET owner_id = (SELECT id from "Owners" WHERE full_name = 'Sam Smith') WHERE name = 'Agumon';
+
+UPDATE animals SET owner_id = (SELECT id FROM "Owners" WHERE full_name = 'Bob') WHERE name IN ('Devimon','Plantmon');
+
+UPDATE animals SET owner_id = (SELECT id FROM "Owners" WHERE full_name = 'Melody Pond') WHERE name IN ('Charmandar','Squirtle','Blossom');
+
+UPDATE animals SET owner_id = (SELECT id FROM "Owners" WHERE full_name = 'Dean Winchester') WHERE name IN ('Angemon','Boarmon');
+
+UPDATE animals SET owner_id = (SELECT id FROM "Owners" WHERE full_name = 'Jennifer Orwell') WHERE name IN ('Gabumon','Pikachu');
+
+

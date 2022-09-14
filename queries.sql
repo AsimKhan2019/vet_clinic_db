@@ -73,3 +73,21 @@ SELECT MAX(weight), MIN(weight), species FROM animals GROUP BY species;
 
 SELECT AVG(escape_attempts), species  FROM animals WHERE date_part('year',date_of_birth) >= 1990 AND da
 te_part('year',date_of_birth) <= 2000 GROUP BY species;
+
+
+--Answer queries for Third Microverse Exercise 
+
+SELECT name FROM animals A JOIN "Owners" O ON A.owner_id = O.id AND O.full_name = 'Melody Pond';
+
+SELECT * FROM animals A JOIN "Species" S ON A.species_id = S.id AND S."name" = 'Pokemon';
+
+SELECT A.name, O.full_name FROM animals A RIGHT JOIN "Owners" O ON A.owner_id = O.id;
+
+SELECT COUNT(A.name), S."name" FROM animals as A INNER JOIN "Species" as S ON A.species_id = S.id GROUP BY S."name";
+
+SELECT DISTINCT A."name" FROM animals A JOIN "Owners" O ON A.owner_id = O.id JOIN "Species" S ON A.species_id = S.id WHERE O.full_name = 'Jennifer Orwell' AND S."name" = 'Digimon';
+
+SELECT DISTINCT A."name" FROM animals A JOIN "Owners" O ON A.owner_id = O.id WHERE O.full_name = 'Dean Winchester' AND A.escape_attempts = 0;
+
+SELECT COUNT(A.name), O.full_name FROM animals A JOIN "Owners" O ON A.owner_id = O.id GROUP BY O.full_name;
+
