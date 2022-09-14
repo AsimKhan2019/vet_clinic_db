@@ -36,6 +36,29 @@ ROLLBACK TO POINT1;
 UPDATE animals SET weight = (weight * -1) WHERE weight < 0;
 COMMIT;
 
+--Perform altering column to unknown or unspecified
+BEGIN TRANSACTION;
+ALTER TABLE animals ALTER COLUMN species TYPE UNKNOWN;
+ROLLBACK;
+
+BEGIN TRANSACTION;
+ALTER TABLE animals ALTER COLUMN species TYPE UNSPECIFIED;
+ROLLBACK;
+
+BEGIN TRANSACTION;
+ALTER TABLE animals ALTER COLUMN species TYPE unknown;
+ROLLBACK;
+
+BEGIN TRANSACTION;
+ALTER TABLE animals ALTER COLUMN species TYPE unspecified;
+ROLLBACK;
+
+--Perform altering column to another data type 
+
+BEGIN TRANSACTION;
+ALTER TABLE animals ALTER COLUMN species TYPE name;
+ROLLBACK;
+
 --Answer to query questions
 
 SELECT COUNT(*) FROM animals;

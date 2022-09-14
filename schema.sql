@@ -26,7 +26,7 @@ COMMENT ON TABLE animals
 -- ALTER TABLE IF EXISTS animals DROP COLUMN IF EXISTS species;
 
 ALTER TABLE IF EXISTS animals
-    ADD COLUMN species text COLLATE pg_catalog."default";
+    ADD COLUMN species string COLLATE pg_catalog."default";
 
 COMMENT ON COLUMN animals.species
     IS 'Another exercise from Microverse';
