@@ -87,6 +87,8 @@ SELECT COUNT(A.name), S."name" FROM animals as A INNER JOIN "Species" as S ON A.
 
 SELECT DISTINCT A."name" FROM animals A JOIN "Owners" O ON A.owner_id = O.id JOIN "Species" S ON A.species_id = S.id WHERE O.full_name = 'Jennifer Orwell' AND S."name" = 'Digimon';
 
+SELECT DISTINCT A."name", A.escape_attempts FROM animals A JOIN "Owners" O ON A.owner_id = O.id WHERE O.full_name = 'Dean Winchester';
+
 SELECT DISTINCT A."name" FROM animals A JOIN "Owners" O ON A.owner_id = O.id WHERE O.full_name = 'Dean Winchester' AND A.escape_attempts = 0;
 
 SELECT COUNT(A.name), O.full_name FROM animals A JOIN "Owners" O ON A.owner_id = O.id GROUP BY O.full_name;
