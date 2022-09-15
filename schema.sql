@@ -116,3 +116,121 @@ COMMENT ON CONSTRAINT owner_id ON animals
     IS 'This is a third Microverse Exercise';
 COMMENT ON CONSTRAINT species_id ON animals
     IS 'This is third Microverse Exercise';
+
+
+
+
+-- Table: vets
+
+-- DROP TABLE IF EXISTS vets;
+
+CREATE TABLE IF NOT EXISTS vets
+(
+    id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 2000 CACHE 1 ),
+    name text COLLATE pg_catalog."default" NOT NULL,
+    age integer NOT NULL,
+    date_of_graduation date NOT NULL,
+    CONSTRAINT vets_pkey PRIMARY KEY (id)
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE IF EXISTS vets
+    OWNER to admin;
+
+COMMENT ON TABLE vets
+    IS 'This is the fourth microverse exercise ';
+
+COMMENT ON COLUMN vets.id
+    IS 'This is the fourth microverse exercise';
+
+
+
+
+-- Table: specializations
+
+-- DROP TABLE IF EXISTS specializations;
+
+CREATE TABLE IF NOT EXISTS specializations
+(
+    id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 2000 CACHE 1 ),
+    species_id integer NOT NULL,
+    vet_id integer NOT NULL,
+    CONSTRAINT specializations_pkey PRIMARY KEY (id),
+    CONSTRAINT species_id FOREIGN KEY (species_id)
+        REFERENCES "Species" (id) MATCH SIMPLE
+        ON UPDATE CASCADE
+        ON DELETE CASCADE,
+    CONSTRAINT vet_id FOREIGN KEY (vet_id)
+        REFERENCES vets (id) MATCH SIMPLE
+        ON UPDATE CASCADE
+        ON DELETE CASCADE
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE IF EXISTS specializations
+    OWNER to admin;
+
+COMMENT ON TABLE specializations
+    IS 'This is the fourth microverse exercise ';
+
+COMMENT ON CONSTRAINT species_id ON specializations
+    IS 'This is the fourth microverse exercise';
+COMMENT ON CONSTRAINT vet_id ON specializations
+    IS 'This is the fourth microverse exercise ';
+-- Index: fki_vet_id
+
+-- DROP INDEX IF EXISTS fki_vet_id;
+
+CREATE INDEX IF NOT EXISTS fki_vet_id
+    ON specializations USING btree
+    (vet_id ASC NULLS LAST)
+    TABLESPACE pg_default;
+
+
+
+-- Table: visits
+
+-- DROP TABLE IF EXISTS visits;
+
+CREATE TABLE IF NOT EXISTS visits
+(
+    id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 2000 CACHE 1 ),
+    animal_id integer NOT NULL,
+    vet_id integer NOT NULL,
+    date_of_visit date NOT NULL,
+    CONSTRAINT visits_pkey PRIMARY KEY (id),
+    CONSTRAINT animal_id FOREIGN KEY (animal_id)
+        REFERENCES animals (id) MATCH SIMPLE
+        ON UPDATE CASCADE
+        ON DELETE CASCADE,
+    CONSTRAINT vet_id FOREIGN KEY (vet_id)
+        REFERENCES vets (id) MATCH SIMPLE
+        ON UPDATE CASCADE
+        ON DELETE CASCADE
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE IF EXISTS visits
+    OWNER to admin;
+
+COMMENT ON TABLE visits
+    IS 'This is the fourth microverse exercise ';
+
+COMMENT ON COLUMN visits.id
+    IS 'This is the fourth microverse exercise ';
+
+COMMENT ON CONSTRAINT animal_id ON visits
+    IS 'This is the fourth microverse exercise ';
+COMMENT ON CONSTRAINT vet_id ON visits
+    IS 'This is the fourth microverse exercise ';
+-- Index: fki_animal_id
+
+-- DROP INDEX IF EXISTS fki_animal_id;
+
+CREATE INDEX IF NOT EXISTS fki_animal_id
+    ON visits USING btree
+    (animal_id ASC NULLS LAST)
+    TABLESPACE pg_default;
