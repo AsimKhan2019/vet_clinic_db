@@ -112,6 +112,6 @@ SELECT A.name, v.date_of_visit, vt.name FROM animals A JOIN visits v ON A.id = v
 
 SELECT "Species".name, vets.name FROM vets FULL JOIN specializations ON specializations.vet_id = vets.id FULL JOIN "Species" ON "Species".id = specializations.species_id; 
 
-SELECT a.name, s.name, vt.name FROM vets vt JOIN visits v ON vt.id = v.vet_id JOIN animals a ON a.id = v.animal_id JOIN "Species" s ON s.id = a.species_id JOIN specilizations sp ON sp.vet_id = vt.id JOIN "Species" spc ON spc.id = sp.species_id WHERE s.id <> spc.id;
+SELECT a.name AS Animal, v.name AS Vet, vs.date_of_visit FROM visits vs JOIN animals a ON vs.animal_id = a.id JOIN vets v ON vs.vet_id = v.id JOIN "Species" s ON a.species_id = s.id WHERE a.species_id NOT IN (SELECT species_id FROM specializations WHERE vet_id = vs.vet_id);
 
 SELECT vs.date_of_visit, v.name, a.name, s.name FROM visits vs JOIN vets v ON v.id = vs.vet_id JOIN animals a ON a.id = vs.animal_id JOIN "Species" s ON a.species_id = s.id WHERE v.name = 'Maisy Smith' ORDER BY s."name";
