@@ -234,3 +234,102 @@ CREATE INDEX IF NOT EXISTS fki_animal_id
     ON visits USING btree
     (animal_id ASC NULLS LAST)
     TABLESPACE pg_default;
+
+
+
+
+
+--For today's exercise on Performance and data tuning 
+
+
+-- Table: Owners
+
+-- DROP TABLE IF EXISTS "Owners";
+
+CREATE TABLE IF NOT EXISTS "Owners"
+(
+    id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 2500010 CACHE 1 ),
+    full_name text COLLATE pg_catalog."default" NOT NULL,
+    age integer,
+    email text COLLATE pg_catalog."default",
+    CONSTRAINT "Owners_pkey" PRIMARY KEY (id)
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE IF EXISTS "Owners"
+    OWNER to admin;
+
+COMMENT ON TABLE "Owners"
+    IS 'This is the third exercise from Microverse';
+-- Index: owner_email_index
+
+-- DROP INDEX IF EXISTS owner_email_index;
+
+CREATE INDEX IF NOT EXISTS owner_email_index
+    ON "Owners" USING btree
+    (id ASC NULLS LAST, email COLLATE pg_catalog."default" ASC NULLS LAST)
+    TABLESPACE pg_default;
+
+
+
+-- Table: visits
+
+-- DROP TABLE IF EXISTS visits;
+
+CREATE TABLE IF NOT EXISTS visits
+(
+    id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 7200000 CACHE 1 ),
+    animal_id integer NOT NULL,
+    vet_id integer NOT NULL,
+    date_of_visit date NOT NULL,
+    CONSTRAINT visits_pkey PRIMARY KEY (id),
+    CONSTRAINT animal_id FOREIGN KEY (animal_id)
+        REFERENCES public.animals (id) MATCH SIMPLE
+        ON UPDATE CASCADE
+        ON DELETE CASCADE,
+    CONSTRAINT vet_id FOREIGN KEY (vet_id)
+        REFERENCES vets (id) MATCH SIMPLE
+        ON UPDATE CASCADE
+        ON DELETE CASCADE
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE IF EXISTS visits
+    OWNER to admin;
+
+COMMENT ON TABLE visits
+    IS 'This is the fourth microverse exercise ';
+
+COMMENT ON COLUMN visits.id
+    IS 'This is the fourth microverse exercise ';
+
+COMMENT ON CONSTRAINT animal_id ON visits
+    IS 'This is the fourth microverse exercise ';
+COMMENT ON CONSTRAINT vet_id ON visits
+    IS 'This is the fourth microverse exercise ';
+-- Index: animal_visits_index
+
+-- DROP INDEX IF EXISTS animal_visits_index;
+
+CREATE INDEX IF NOT EXISTS animal_visits_index
+    ON visits USING btree
+    (id ASC NULLS LAST, animal_id ASC NULLS LAST)
+    TABLESPACE pg_default;
+-- Index: fki_animal_id
+
+-- DROP INDEX IF EXISTS fki_animal_id;
+
+CREATE INDEX IF NOT EXISTS fki_animal_id
+    ON visits USING btree
+    (animal_id ASC NULLS LAST)
+    TABLESPACE pg_default;
+-- Index: vet_visits_index
+
+-- DROP INDEX IF EXISTS vet_visits_index;
+
+CREATE INDEX IF NOT EXISTS vet_visits_index
+    ON visits USING btree
+    (vet_id ASC NULLS LAST)
+    TABLESPACE pg_default;
