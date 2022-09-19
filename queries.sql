@@ -115,3 +115,16 @@ SELECT "Species".name, vets.name FROM vets FULL JOIN specializations ON speciali
 SELECT a.name AS Animal, v.name AS Vet, vs.date_of_visit FROM visits vs JOIN animals a ON vs.animal_id = a.id JOIN vets v ON vs.vet_id = v.id JOIN "Species" s ON a.species_id = s.id WHERE a.species_id NOT IN (SELECT species_id FROM specializations WHERE vet_id = vs.vet_id);
 
 SELECT vs.date_of_visit, v.name, a.name, s.name FROM visits vs JOIN vets v ON v.id = vs.vet_id JOIN animals a ON a.id = vs.animal_id JOIN "Species" s ON a.species_id = s.id WHERE v.name = 'Maisy Smith' ORDER BY s."name";
+
+
+--Today's exercise on performance and data query tuning 
+
+EXPLAIN ANALYZE SELECT COUNT(*) FROM visits where animal_id = 4;
+
+EXPLAIN ANALYZE SELECT * FROM visits where vet_id = 2;
+
+EXPLAIN ANALYZE SELECT * FROM "Owners" where email = 'owner_18327@mail.com';
+
+CREATE INDEX animal_visits_index ON visits (id,animal_id);
+
+CREATE INDEX vet_visits_index ON visits (vet_id);
