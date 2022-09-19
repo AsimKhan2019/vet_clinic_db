@@ -33,6 +33,11 @@ Run the commands
 - Twitter: [@twitterhandle](https://twitter.com/vtechbiz)
 - LinkedIn: [LinkedIn](https://www.linkedin.com/in/asim-khan-9bbb4211/)
 
+**Berkay Akbas**
+
+- GitHub: [@githubhandle](https://github.com/Berkay-akbas)
+- LinkedIn: [LinkedIn](https://www.linkedin.com/in/berkay-akbas-a03b3b239/)
+
 ## 🤝 Contributing
 
 I will open issues in the Issues section of the project. Feel free to add your comments to the issues
