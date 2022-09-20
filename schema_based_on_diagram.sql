@@ -169,3 +169,49 @@ CREATE INDEX IF NOT EXISTS fki_fk_items_treatments
     ON invoice_items USING btree
     (treatment_id ASC NULLS LAST)
     TABLESPACE pg_default;
+
+
+
+-- Table: treatment_history
+
+-- DROP TABLE IF EXISTS treatment_history;
+
+CREATE TABLE IF NOT EXISTS treatment_history
+(
+    id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 100 CACHE 1 ),
+    medical_history_id integer NOT NULL,
+    treatment_id integer NOT NULL,
+    CONSTRAINT treatment_history_pkey PRIMARY KEY (id),
+    CONSTRAINT fk_history FOREIGN KEY (medical_history_id)
+        REFERENCES medical_histories (id) MATCH SIMPLE
+        ON UPDATE CASCADE
+        ON DELETE CASCADE,
+    CONSTRAINT fk_treatment FOREIGN KEY (treatment_id)
+        REFERENCES treatments (id) MATCH SIMPLE
+        ON UPDATE CASCADE
+        ON DELETE CASCADE
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE IF EXISTS treatment_history
+    OWNER to admin;
+
+COMMENT ON TABLE treatment_history
+    IS 'This is the day 2 exercise of Microverse ';
+-- Index: fki_h
+
+-- DROP INDEX IF EXISTS fki_h;
+
+CREATE INDEX IF NOT EXISTS fki_h
+    ON public.treatment_history USING btree
+    (medical_history_id ASC NULLS LAST)
+    TABLESPACE pg_default;
+-- Index: fki_t
+
+-- DROP INDEX IF EXISTS fki_t;
+
+CREATE INDEX IF NOT EXISTS fki_t
+    ON treatment_history USING btree
+    (treatment_id ASC NULLS LAST)
+    TABLESPACE pg_default;
